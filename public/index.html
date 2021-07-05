@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Chat</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        #messages-container{
+            height: 90%;
+        }
+    </style>
+</head>
+
+<body class="h-100">
+    <section id="app" class="container-fluid h-100">
+        <template>
+            <div id="messages-container" class="overflow-auto">
+                <div v-for="item in messages" class="shadow p-3 m-2 rounded w-80 col-sm-11 col-7" :class="['Me' == item.author ? 'float-end alert-primary' : 'float-start alert-secondary']">
+                    <div class="ms-2 me-auto mx-100">
+                        <div class="fw-bold">{{item.author}}</div>
+                        {{item.message}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row align-self-end mt-2">
+                <form v-on:submit.prevent="send" class="input-group mb-3">
+                    <input type="text" v-model="message" class="form-control" placeholder="Mensaje">
+                    <button class="btn btn-outline-secondary" type="submit">Enviar</button>
+                </form>
+            </div>
+        </template>
+    </section>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
